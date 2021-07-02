@@ -2,5 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.band_list, name='band_list'),
+    path('', views.get_users, name='get_users'),
+    path('profile/', views.get_bands, name='get_bands'),
+    path('profile/<int:pk>/', views.get_user, name='get_user')
 ]

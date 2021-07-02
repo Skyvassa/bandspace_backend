@@ -1,3 +1,4 @@
+from django.http.response import HttpResponsePermanentRedirect
 from django.shortcuts import render
 from django.core.serializers import serialize
 from django.http import HttpResponse
@@ -6,8 +7,18 @@ from .models import User, Band
 
 import json
 
-def band_list(request):
+def get_bands(request):
     bands = Band.objects.all()
-    return render(request, 'bandspace/band_list.html', {'bands':bands})
+    parsed_bands = serialize("json", bands)
+    return HttpResponse(parsed_bands, content_type="application/json")
+    # return render(request, 'bandspace/get_bands.html', {'bands':bands})
 
-# Create your views here.
+def get_users(request):
+    users = User.objects.all()
+    parsed_users = serialize("json", users)
+    return HttpResponse(parsed_users, content_type="application/json")
+
+def get_user(request, pk):
+    user = User.objects.get(id=pk)
+    parsed_user = serialize("json", [user])
+    return HttpResponse(parsed_user, content_type="application/json")
