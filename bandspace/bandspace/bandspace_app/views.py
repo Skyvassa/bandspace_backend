@@ -22,3 +22,6 @@ def get_user(request, pk):
     user = User.objects.get(id=pk)
     parsed_user = serialize("json", [user])
     return HttpResponse(parsed_user, content_type="application/json")
+
+
+    
