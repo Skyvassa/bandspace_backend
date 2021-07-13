@@ -23,5 +23,13 @@ def get_user(request, pk):
     parsed_user = serialize("json", [user])
     return HttpResponse(parsed_user, content_type="application/json")
 
+def create_user(request, upk):
+    parsed_body = request.body.decode('utf-8')
+    parsed_body = json.loads(parsed_body)
 
-    
+    user = User(content=parsed_body['data'])
+    user.save()
+
+    parsed_user = serialize('json', [user])
+
+    return HttpResponse(parsed_user, content_type="application/json")
