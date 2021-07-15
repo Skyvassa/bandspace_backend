@@ -8,7 +8,7 @@ class User(models.Model):
     bio = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.username
 
 class Band(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bands', default=0)
