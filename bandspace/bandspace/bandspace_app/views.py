@@ -23,7 +23,7 @@ def get_user(request, pk):
     parsed_user = serialize("json", [user])
     return HttpResponse(parsed_user, content_type="application/json")
 
-def get_message(request):
+def get_messages(request):
     messages = Message.objects.all()
     parsed_messages = serialize("json", messages)
     return HttpResponse(parsed_messages, content_type="application/json")
@@ -31,9 +31,9 @@ def get_message(request):
 def create_message(request, upk):
     parsed_body = request.body.decode('utf-8')
     parsed_body = json.loads(parsed_body)
+    print(parsed_body)
 
     message = Message(content=parsed_body['data'])
-
     message.save()
 
     parsed_message = serialize('json', [message])
