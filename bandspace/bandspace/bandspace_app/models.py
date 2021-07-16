@@ -11,7 +11,6 @@ class User(models.Model):
         return self.username
 
 class Band(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bands', default=0)
     band_name = models.CharField(max_length=100)
     photo = models.TextField()
     about = models.CharField(max_length=200)
@@ -21,9 +20,8 @@ class Band(models.Model):
     def __str__(self):
         return self.band_name
 
-class UserFavBand(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userfavbands')
-    band = models.ForeignKey(Band, on_delete=models.CASCADE, related_name='bandfavusers')
+class Message(models.Model):
+    content = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.band.band_name
+        return self.content
